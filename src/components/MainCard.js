@@ -1,22 +1,20 @@
 import Title from "./Title";
 import Input from "./Input";
 import Evolutions from "./Evolutions";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function MainCard() {
   const [pokeData, setPokeData] = useState(null);
-  //   const [pokeEvos, setPokeEvos] = useState([]);
+  const [pokeEvos, setPokeEvos] = useState(null);
+
+  function handlePokeEvos(pokeArray) {
+    setPokeEvos(pokeArray);
+  }
 
   function handlePokeData(poke) {
     setPokeData(poke);
     // console.log("this is pokedata inside maincard component ", poke);
   }
-  let arr = [];
-  async function getPokeSprites(pokeName) {
-    console.log("this is inside ßpokeSprites func", pokeName);
-    pokeName.map((poke) => <Evolutions pokeName={poke} />);
-  }
-
   async function getPokeNames() {
     let pokeDataUrl = pokeData?.species.url;
 
@@ -39,15 +37,28 @@ export default function MainCard() {
       arrOfNames.push(...nextEvo.map((poke) => poke.species.name));
       nextEvo = nextEvo[0].evolves_to;
     }
-    getPokeSprites(arrOfNames);
+    handlePokeEvos(arrOfNames);
   }
+  console.log("this is pokeevo array", pokeEvos);
+
+  useEffect(() => {
+    getPokeNames();
+  }, [pokeData]);
+  // console.log("this is pokeEvos", pokeEvos);
 
   return (
     <div className="maincard">
       <Title />
       <Input pokeDataFunc={handlePokeData} />
-
-      <Evolutions />
+      <div className="evo">
+        {pokeEvos
+          ? pokeEvos.map((pokeName) => (
+              <>
+                <Evolutions name={pokeName} />
+              </>
+            ))
+          : null}
+      </div>
     </div>
   );
 }

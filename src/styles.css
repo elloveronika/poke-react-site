@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
 * {
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
@@ -32,6 +33,10 @@ body {
   backdrop-filter: blur(6px);
   border-radius: 10px;
   box-shadow: 0 5px 10px 0 gray;
+  max-width: 40%;
+  min-width: 30%;
+  min-height: 60%;
+  max-height: 60%;
 }
 /* .maincard::backdrop {
   filter: blur(2px);
@@ -50,6 +55,7 @@ input {
   border-radius: 20px;
   border: none;
   margin: 10px;
+  padding: 5px 20px 5px 20px;
 }
 button {
   background-image: url("./images/pokeBall.jpeg");
@@ -58,4 +64,26 @@ button {
   width: 40px;
   background-size: contain;
   background-position: center;
+}
+.evo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+}
+.evo > div {
+  margin: 10px;
+  /* background-color: rgba(255, 255, 0, 0.448); */
+  height: 20%;
+}
+figure {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.pokeName {
+  font-family: "Press Start 2P", cursive;
+  font-size: smaller;
 }
